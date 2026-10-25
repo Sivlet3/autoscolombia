@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autos Colombia | Control de parqueadero</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">AC</div>
+    <div><h1>Autos Colombia</h1><p>Control de entradas y salidas</p></div>
+    <span class="status"><i></i> Sistema operativo</span>
+  </header>
+  <main class="container">
+    <section class="intro">
+      <div><p class="eyebrow">PANEL OPERATIVO</p><h2>Movimientos del parqueadero</h2><p>Registra entradas, controla vehículos dentro y cierra movimientos al salir.</p></div>
+      <div class="summary"><span>Vehículos dentro</span><strong id="inside-count">—</strong></div>
+    </section>
+    <div id="message" class="message" role="status" hidden></div>
+    <section class="layout">
+      <article class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">NUEVO MOVIMIENTO</p><h3>Registrar entrada</h3></div><span class="step">01</span></div>
+        <form id="entry-form">
+          <label for="plate">Placa del vehículo</label>
+          <input id="plate" name="plate" maxlength="10" placeholder="Ej. ABC123" required minlength="5">
+          <div class="form-row">
+            <div><label for="vehicleType">Tipo de vehículo</label><select id="vehicleType" name="vehicleType"><option value="AUTOMOVIL">Automóvil</option><option value="MOTOCICLETA">Motocicleta</option><option value="CAMIONETA">Camioneta</option><option value="OTRO">Otro</option></select></div>
+            <div><label for="ownerName">Propietario / responsable</label><input id="ownerName" name="ownerName" maxlength="120" required placeholder="Nombre completo"></div>
+          </div>
+          <label for="notes">Novedades de entrada <span class="optional">Opcional</span></label>
+          <textarea id="notes" name="notes" rows="3" maxlength="500" placeholder="Estado visible, accesorios, observaciones..."></textarea>
+          <button type="submit">Registrar entrada <span>→</span></button>
+        </form>
+      </article>
+      <article class="panel list-panel">
+        <div class="panel-heading"><div><p class="eyebrow">ESTADO ACTUAL</p><h3>Vehículos dentro</h3></div><button id="refresh" class="secondary" type="button">Actualizar ↻</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Vehículo</th><th>Responsable</th><th>Entrada</th><th>Acción</th></tr></thead><tbody id="inside-body"><tr><td colspan="4" class="empty">Cargando movimientos…</td></tr></tbody></table></div>
+      </article>
+    </section>
+    <section class="panel history-panel">
+      <div class="panel-heading"><div><p class="eyebrow">CONSULTA</p><h3>Historial por placa</h3></div></div>
+      <form id="history-form" class="search-form"><input id="history-plate" placeholder="Escribe una placa, ej. ABC123" required><button type="submit" class="secondary">Buscar</button></form>
+      <div id="history-results" class="history-results"><p class="muted">Busca una placa para consultar sus movimientos.</p></div>
+    </section>
+    <footer>Autos Colombia · Iteración 1 · Gestión de entradas y salidas</footer>
+  </main>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "autos-colombia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MVP modular para gestion de entradas y salidas del parqueadero Autos Colombia",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "mysql2": "^3.11.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

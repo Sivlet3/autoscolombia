@@ -1,0 +1,419 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #172b4d;
+  background: #f4f7fb;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* ==========================================
+   Estructura Global y Layout
+   ========================================== */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 34px 24px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.45fr);
+  gap: 20px;
+}
+
+/* ==========================================
+   Barra Superior (Topbar)
+   ========================================== */
+.topbar {
+  height: 88px;
+  background: #fff;
+  border-bottom: 1px solid #e5eaf2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 max(24px, calc((100% - 1240px) / 2));
+}
+
+.topbar h1 {
+  font-size: 17px;
+  margin: 0;
+}
+
+.topbar p {
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: #738198;
+}
+
+.brand-mark {
+  height: 44px;
+  width: 44px;
+  border-radius: 13px;
+  background: #143d70;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.status {
+  margin-left: auto;
+  font-size: 12px;
+  color: #527064;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #28a879;
+}
+
+/* ==========================================
+   Introducción y Resumen (Intro & Summary)
+   ========================================== */
+.intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.intro h2 {
+  font-size: 28px;
+  letter-spacing: -0.8px;
+  margin: 0 0 8px;
+}
+
+.intro p:not(.eyebrow) {
+  color: #75839a;
+  margin: 0;
+  font-size: 14px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  color: #56789e;
+  margin: 0 0 8px;
+}
+
+.summary {
+  background: #fff;
+  border: 1px solid #e5eaf2;
+  border-radius: 14px;
+  padding: 17px 22px;
+  min-width: 170px;
+  box-shadow: 0 3px 12px #18385c08;
+}
+
+.summary span {
+  display: block;
+  color: #738198;
+  font-size: 12px;
+}
+
+.summary strong {
+  display: block;
+  font-size: 27px;
+  margin-top: 4px;
+}
+
+/* ==========================================
+   Paneles (Panels)
+   ========================================== */
+.panel {
+  background: white;
+  border: 1px solid #e5eaf2;
+  border-radius: 16px;
+  padding: 23px;
+  box-shadow: 0 4px 18px #18385c08;
+  min-width: 0;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.panel-heading h3 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.3px;
+}
+
+.step {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: #edf4fc;
+  color: #315d8b;
+  border-radius: 9px;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+/* ==========================================
+   Formularios y Elementos de Entrada
+   ========================================== */
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #31445e;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #dce4ee;
+  border-radius: 9px;
+  padding: 11px 12px;
+  font: inherit;
+  font-size: 13px;
+  color: #24364e;
+  background: #fff;
+  outline: none;
+  margin-bottom: 17px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #477bb5;
+  box-shadow: 0 0 0 3px #477bb51a;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 12px;
+}
+
+.optional {
+  font-weight: 400;
+  color: #8a97aa;
+  margin-left: 5px;
+}
+
+/* ==========================================
+   Botones (Buttons)
+   ========================================== */
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 15px;
+  background: #174879;
+  color: white;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+button span {
+  float: right;
+  margin-left: 14px;
+}
+
+.secondary {
+  background: #edf3fa;
+  color: #31577f;
+  padding: 9px 12px;
+}
+
+.exit-btn {
+  background: #fff0ed;
+  color: #a74738;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+
+/* ==========================================
+   Tablas (Tables)
+   ========================================== */
+.table-wrap {
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #8290a4;
+  background: #f8fafd;
+  padding: 12px 10px;
+}
+
+td {
+  font-size: 12px;
+  padding: 14px 10px;
+  border-bottom: 1px solid #edf1f6;
+  color: #42536b;
+}
+
+td strong {
+  color: #1b2f4a;
+}
+
+.plate {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.type {
+  display: block;
+  color: #8a97aa;
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+/* ==========================================
+   Historial y Componentes Específicos
+   ========================================== */
+.history-panel {
+  margin-top: 20px;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  max-width: 520px;
+}
+
+.search-form input {
+  margin: 0;
+}
+
+.search-form button {
+  flex-shrink: 0;
+}
+
+.history-results {
+  margin-top: 16px;
+}
+
+.history-results table {
+  margin-top: 12px;
+}
+
+/* ==========================================
+   Mensajes, Estados y Footer
+   ========================================== */
+.message {
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+
+.message.success {
+  background: #e8f7ef;
+  color: #216d48;
+}
+
+.message.error {
+  background: #fff0ed;
+  color: #a74738;
+}
+
+.empty {
+  text-align: center;
+  padding: 28px;
+  color: #8a97aa;
+}
+
+.muted {
+  font-size: 13px;
+  color: #8a97aa;
+}
+
+footer {
+  text-align: center;
+  color: #9aa5b5;
+  font-size: 11px;
+  padding: 28px 0 8px;
+}
+
+/* ==========================================
+   Media Queries (Responsividad)
+   ========================================== */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .intro h2 {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 24px 14px;
+  }
+  .topbar {
+    padding: 0 15px;
+  }
+  .status {
+    font-size: 0;
+  }
+  .intro {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .summary {
+    width: 100%;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .panel {
+    padding: 17px;
+  }
+  .search-form {
+    flex-direction: column;
+  }
+  .search-form button {
+    width: 100%;
+  }
+}
