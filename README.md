@@ -1,127 +1,151 @@
-# Autos Colombia — Iteración 1
-Sistema modular para registrar entradas y salidas de vehículos en un parqueadero por mensualidad Ac1 
+# Autos Colombia
 
-## 1. Alcance
-Esta entrega implementa un MVP académico de la **Iteración 1: Gestión de entrada y salida de vehículos**. Incluye:
-- Registro de entrada de un vehículo.
-- Consulta de vehículos actualmente dentro.
-- Registro de salida y cálculo de tiempo transcurrido.
-- Búsqueda de movimientos por placa.
-- API REST modular y una interfaz web sencilla.
-- Esquema físico MySQL, MER/MR documentados y fuentes de diagramas para recrearlos en StarUML.
-- Historias de usuario, requerimientos y criterios de aceptación.
+Sistema web para administrar la operación de un parqueadero: movimientos de vehículos, clientes y celdas.
 
-> Esta versión no implementa todavía el módulo completo de usuarios, celdas, novedades ni pagos; se dejan identificados como iteraciones posteriores. La interfaz usa una API local y datos persistidos en MySQL.
+## Funcionalidades
 
-## 2. Tecnologías
-- Node.js 20+
-- Express
-- MySQL 8+
-- HTML, CSS y JavaScript modular en navegador
-- StarUML para diagramas UML; Figma para mockups
+- Registrar entradas y salidas de vehículos y consultar los que están dentro.
+- Consultar el historial de movimientos por placa.
+- Crear, consultar y actualizar clientes, y asociarles vehículos.
+- Crear y editar celdas, consultar su estado y asignarlas o liberarlas.
+- Filtrar celdas por tipo y estado.
 
-## 3. Requisitos previos
-Instala Node.js 20+ y MySQL 8+. Crea la base de datos con el script incluido.
+## Tecnologías
 
-## 4. Configuración
-1. Descomprime el proyecto.
-2. Abre una terminal en la carpeta autos-colombia.
-3. Copia .env.example a .env y configura las credenciales de MySQL.
-4. En MySQL ejecuta el contenido de database/schema.sql.
-5. Instala dependencias y ejecuta el servidor:
+- **Backend:** Node.js 20+ y Express
+- **Base de datos:** PostgreSQL 15+
+- **Frontend:** HTML, CSS y JavaScript con módulos ES
+- **Administración de la base de datos:** pgAdmin (opcional)
 
-bash
-npm install
-npm run dev
+## Requisitos
 
+- Node.js 20 o superior
+- PostgreSQL 15 o superior
+- npm
 
-6. Abre http://localhost:3000.
+## Instalación y configuración
 
-## 5. API
+1. Clona o descomprime el repositorio y abre una terminal en la carpeta del proyecto.
+2. Crea una base de datos llamada `autos_colombia` en PostgreSQL.
+3. En la raíz del proyecto, crea un archivo `.env` con tus credenciales locales:
+
+   ```env
+   PORT=3000
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_USER=postgres
+   DB_PASSWORD=tu_contraseña
+   DB_NAME=autos_colombia
+   ```
+
+4. Conéctate a la base de datos `autos_colombia` y ejecuta el script [`database/schema.sql`](database/schema.sql).
+5. Instala las dependencias e inicia el servidor:
+
+   ```bash
+   npm install
+   npm start
+   ```
+
+   Para desarrollo, puedes usar `npm run dev`.
+
+6. Abre [http://localhost:3000](http://localhost:3000).
+
+> Ejecuta `schema.sql` una sola vez en una base de datos nueva: el script crea tipos y tablas que ya no deben existir previamente.
+
+## Módulos de la aplicación
+
+| Página | Descripción |
+|---|---|
+| Parqueadero | Registrar entradas y salidas, consultar vehículos dentro y buscar historial |
+| Clientes | Registrar y administrar clientes y sus vehículos asociados |
+| Celdas | Crear y administrar celdas, filtrar por tipo/estado y asignarlas a vehículos |
+
+## API REST
+
+Todas las rutas están disponibles bajo `/api`.
+
+### Sistema
+
 | Método | Ruta | Descripción |
 |---|---|---|
-| GET | /api/health | Estado del servicio |
-| POST | /api/vehicles/entry | Registrar entrada |
-| GET | /api/vehicles/inside | Listar vehículos dentro |
-| POST | /api/vehicles/:id/exit | Registrar salida |
-| GET | /api/vehicles/history?plate=ABC123 | Consultar historial por placa |
+| `GET` | `/health` | Verificar el estado del servicio |
 
-Ejemplo de entrada:
-json
-{
-  "plate": "ABC123",
-  "vehicleType": "AUTOMOVIL",
-  "ownerName": "María Pérez",
-  "notes": "Sin novedades visibles"
-}
+### Vehículos y movimientos
 
+| Método | Ruta | Descripción |
+|---|---|---|
+| `POST` | `/vehicles/entry` | Registrar una entrada |
+| `GET` | `/vehicles/inside` | Listar vehículos dentro del parqueadero |
+| `POST` | `/vehicles/:id/exit` | Registrar la salida de un vehículo |
+| `GET` | `/vehicles/history?plate=ABC123` | Consultar movimientos por placa |
 
-## 6. Estructura del proyecto
-text
+### Clientes
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| `GET` | `/clients?q=texto` | Listar o buscar clientes |
+| `POST` | `/clients` | Crear un cliente |
+| `GET` | `/clients/:id` | Consultar un cliente y sus vehículos |
+| `PUT` | `/clients/:id` | Actualizar un cliente |
+| `POST` | `/clients/:id/inactivate` | Inactivar un cliente |
+| `POST` | `/clients/:id/reactivate` | Reactivar un cliente |
+| `POST` | `/clients/:id/vehicles` | Asociar un vehículo a un cliente |
+
+### Celdas
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| `GET` | `/cells` | Consultar celdas y resumen por estado; acepta filtros `type` y `status` |
+| `POST` | `/cells` | Crear una celda |
+| `PUT` | `/cells/:id` | Actualizar una celda |
+| `POST` | `/cells/:id/inactivate` | Inactivar una celda |
+| `POST` | `/cells/:id/reactivate` | Reactivar una celda |
+| `POST` | `/cells/:id/assign` | Asignar un vehículo a una celda |
+| `POST` | `/cells/:id/release` | Liberar una celda |
+
+## Estructura del proyecto
+
+```text
 autos-colombia/
 ├── database/
+│   ├── env.example
 │   └── schema.sql
 ├── docs/
-│   ├── requerimientos.md
 │   ├── historias-usuario.md
-│   ├── modelos-datos.md
-│   ├── arquitectura.md
-│   ├── mockups-figma.md
-│   └── diagrams/
-│       ├── casos-uso.puml
-│       ├── clases.puml
-│       └── paquetes.puml
+│   ├── pruebas.md
+│   ├── requerimientos.md
+│   └── requerimientos2.md
 ├── public/
-│   ├── index.html
-│   ├── css/styles.css
-│   └── js/
-│       ├── api.js
-│       └── app.js
+│   ├── css/
+│   │   └── styles.css
+│   ├── js/
+│   │   ├── api.js
+│   │   ├── app.js
+│   │   ├── celdas.js
+│   │   └── clientes.js
+│   ├── celdas.html
+│   ├── clientes.html
+│   └── index.html
 ├── src/
-│   ├── app.js
-│   ├── server.js
-│   ├── config/database.js
-│   ├── modules/vehicles/
-│   │   ├── vehicle.controller.js
-│   │   ├── vehicle.routes.js
-│   │   ├── vehicle.service.js
-│   │   └── vehicle.repository.js
-│   └── middleware/error-handler.js
-├── .env.example
-└── package.json
+│   ├── config/
+│   ├── middleware/
+│   └── modules/
+│       ├── cells/
+│       ├── clients/
+│       └── vehicles/
+├── package.json
+└── README.md
+```
 
+## Reglas principales
 
-## 7. Decisiones y reglas de negocio
-- La placa se normaliza a mayúsculas y se eliminan espacios.
-- Un vehículo no puede tener dos entradas abiertas simultáneamente.
-- La salida solo se registra si existe una entrada abierta.
-- entry_at y exit_at se almacenan como fecha/hora.
-- Los datos de conexión se leen desde variables de entorno; no se guardan contraseñas en Git.
-- Los endpoints validan datos básicos y devuelven códigos HTTP apropiados.
+- Las placas se normalizan a mayúsculas y sin espacios.
+- Un vehículo no puede tener más de una entrada abierta al mismo tiempo.
+- Solo se registra una salida cuando el vehículo tiene una entrada abierta.
+- El código de cada celda y la placa de cada vehículo deben ser únicos.
+- Una celda ocupada debe tener un vehículo asignado; una celda libre o inactiva no.
+- Las credenciales de la base de datos deben configurarse localmente en `.env`; no las publiques.
 
-## 8. Pruebas manuales rápidas
-1. Registra una entrada con placa ABC123.
-2. Comprueba que aparezca en “Vehículos dentro”.
-3. Registra su salida.
-4. Confirma que ya no aparece como vehículo dentro.
-5. Consulta el historial por placa.
+## Documentación
 
-## 9. GitHub
-Desde la carpeta del proyecto:
-bash
-git init
-git add .
-git commit -m "Entrega inicial Autos Colombia Iteracion 1"
-git branch -M main
-git remote add origin https://github.com/TU_USUARIO/autos-colombia.git
-git push -u origin main
-
-Crea previamente un repositorio vacío en GitHub y reemplaza TU_USUARIO por tu usuario. No compartas el archivo .env.
-
-## 10. StarUML y Figma
-- Los archivos .puml de docs/diagrams/ son una especificación de referencia para recrear los diagramas en StarUML. PlantUML no es un archivo nativo de StarUML.
-- docs/mockups-figma.md describe las pantallas, componentes y flujos que debes construir en Figma. La web incluida sirve como prototipo funcional inicial, no como archivo .fig.
-- Antes de entregar, captura los diagramas y mockups finales desde las herramientas solicitadas e inclúyelos en el informe.
-
-## 11. Limitaciones del MVP
-No hay autenticación ni roles, gestión de celdas, registro formal de clientes, novedades estructuradas, facturación ni pagos. Añádelos como iteraciones siguientes. Para un entorno real se requieren controles de acceso, auditoría, copias de seguridad, pruebas automatizadas y revisión de seguridad.
+Consulta [`docs/requerimientos.md`](docs/requerimientos.md), [`docs/requerimientos2.md`](docs/requerimientos2.md), [`docs/historias-usuario.md`](docs/historias-usuario.md) y [`docs/pruebas.md`](docs/pruebas.md).

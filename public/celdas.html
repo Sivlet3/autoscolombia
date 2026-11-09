@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autos Colombia | Celdas</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">AC</div>
+    <div><h1>Autos Colombia</h1><p>Gestión de celdas</p></div>
+    <nav class="nav"><a href="/">Parqueadero</a><a href="/clientes.html">Clientes</a></nav>
+  </header>
+  <main class="container">
+    <div id="message" class="message" role="status" hidden></div>
+    <section class="toolbar">
+      <span class="counter free">Libres: <strong id="count-free">—</strong></span>
+      <span class="counter busy">Ocupadas: <strong id="count-busy">—</strong></span>
+      <span class="counter off">Inactivas: <strong id="count-off">—</strong></span>
+      <div class="filters">
+        <div><label for="filter-type">Tipo</label><select id="filter-type"><option value="">Todos</option><option value="AUTOMOVIL">Automóvil</option><option value="MOTOCICLETA">Motocicleta</option><option value="CAMIONETA">Camioneta</option><option value="OTRO">Otro</option></select></div>
+        <div><label for="filter-status">Estado</label><select id="filter-status"><option value="">Todos</option><option value="LIBRE">Libre</option><option value="OCUPADA">Ocupada</option><option value="INACTIVA">Inactiva</option></select></div>
+        <button type="button" id="btn-new">+ Nueva celda</button>
+      </div>
+    </section>
+    <section class="panel" id="new-panel" hidden>
+      <div class="panel-heading"><div><p class="eyebrow">NUEVA CELDA</p><h3>Crear celda</h3></div></div>
+      <form id="new-form" class="form-row">
+        <div><label for="new-code">Código</label><input id="new-code" name="code" maxlength="10" required placeholder="Ej. A-01"></div>
+        <div><label for="new-type">Tipo de celda</label><select id="new-type" name="cellType"><option value="AUTOMOVIL">Automóvil</option><option value="MOTOCICLETA">Motocicleta</option><option value="CAMIONETA">Camioneta</option><option value="OTRO">Otro</option></select></div>
+        <button type="submit">Crear celda</button>
+      </form>
+    </section>
+    <section class="layout">
+      <article class="panel">
+        <div id="cell-grid" class="cell-grid"><p class="muted">Cargando celdas…</p></div>
+        <p class="muted legend">Verde: libre · Azul: ocupada, con la placa asignada · Gris: inactiva</p>
+      </article>
+      <article class="panel" id="cell-panel" hidden>
+        <h3 id="cell-title">Celda</h3>
+        <p id="cell-info" class="muted"></p>
+        <div class="actions">
+          <button type="button" class="secondary" id="btn-edit">Editar celda</button>
+          <button type="button" id="btn-assign">Asignar a vehículo</button>
+          <button type="button" class="secondary" id="btn-toggle">Inactivar celda</button>
+          <button type="button" class="secondary" id="btn-release">Liberar celda</button>
+        </div>
+        <form id="assign-form" hidden>
+          <label for="assign-plate">Placa del vehículo</label>
+          <input id="assign-plate" name="plate" maxlength="10" minlength="5" required placeholder="Ej. ABC123">
+          <button type="submit">Asignar</button>
+        </form>
+        <form id="edit-form" hidden>
+          <label for="edit-code">Código</label><input id="edit-code" name="code" maxlength="10" required>
+          <label for="edit-type">Tipo de celda</label>
+          <select id="edit-type" name="cellType"><option value="AUTOMOVIL">Automóvil</option><option value="MOTOCICLETA">Motocicleta</option><option value="CAMIONETA">Camioneta</option><option value="OTRO">Otro</option></select>
+          <button type="submit">Guardar cambios</button>
+        </form>
+      </article>
+    </section>
+    <footer>Autos Colombia · Iteración 2 · Gestión de clientes y celdas</footer>
+  </main>
+  <script type="module" src="/js/celdas.js"></script>
+</body>
+</html>

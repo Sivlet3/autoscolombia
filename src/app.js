@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const vehicleRoutes = require('./modules/vehicles/vehicle.routes');
+const clientRoutes = require('./modules/clients/client.routes');
+const cellRoutes = require('./modules/cells/cell.routes');
 const { notFound, errorHandler } = require('./middleware/error-handler');
 
 const app = express();
@@ -9,6 +11,8 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', app: 'Autos Colombia' }));
 app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/clients', clientRoutes);
+app.use('/api/cells', cellRoutes);
 app.use(notFound);
 app.use(errorHandler);
 

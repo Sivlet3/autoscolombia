@@ -19,10 +19,10 @@ async function search(term) {
   const like = `%${term}%`;
   const [rows] = await db.execute(
     `SELECT c.id, c.document_type, c.document_number, c.full_name, c.phone, c.email, c.status,
-           (SELECT GROUP_CONCAT(v.plate ORDER BY v.plate SEPARATOR ', ')
+           (SELECT string_agg(v.plate, ', ' ORDER BY v.plate)
               FROM vehicles v WHERE v.client_id = c.id) AS plates
     FROM clients c
-    WHERE c.document_number LIKE ? OR c.full_name LIKE ?
+    WHERE c.document_number ILIKE ? OR c.full_name ILIKE ?
     ORDER BY c.full_name
     LIMIT 200`,
     [like, like]
