@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autos Colombia | Pasarela de práctica</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pagos.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">AC</div>
+    <div><h1>Autos Colombia</h1><p>Pasarela simulada</p></div>
+    <nav class="nav"><a href="/">Parqueadero</a><a href="/clientes.html">Clientes</a><a href="/celdas.html">Celdas</a><a href="/pagos.html">Pagos</a><a href="/mensualidades.html">Mensualidades</a></nav>
+  </header>
+  <main class="container">
+    <section class="panel center-card" id="card">
+      <div class="sim-banner">Pasarela de <strong>práctica</strong>: no se cobra dinero. Sirve para probar el flujo sin credenciales.</div>
+      <p class="muted" id="info">Cargando pago…</p>
+      <div class="sim-actions" id="actions" hidden>
+        <button type="button" data-outcome="approved">Aprobar el pago</button>
+        <button type="button" class="secondary" data-outcome="declined">Rechazar el pago</button>
+        <button type="button" class="exit-btn" data-outcome="error">Simular un error</button>
+      </div>
+    </section>
+  </main>
+  <div id="message" hidden></div>
+  <script type="module" src="/js/pasarela-simulada.js"></script>
+</body>
+</html>

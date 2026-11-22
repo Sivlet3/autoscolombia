@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autos Colombia | Mensualidades</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pagos.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">AC</div>
+    <div><h1>Autos Colombia</h1><p>Mensualidades</p></div>
+    <nav class="nav"><a href="/">Parqueadero</a><a href="/clientes.html">Clientes</a><a href="/celdas.html">Celdas</a><a href="/pagos.html">Pagos</a><a href="/mensualidades.html">Mensualidades</a></nav>
+  </header>
+  <main class="container">
+    <div id="message" class="message" role="status" hidden></div>
+    <section class="layout">
+      <article class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">CONSULTA</p><h3>Estado por placa</h3></div></div>
+        <form id="plate-form" class="search-form" style="max-width:none">
+          <input id="plate" maxlength="10" minlength="5" required placeholder="Ej. ABC123">
+          <button type="submit" class="secondary">Consultar</button>
+        </form>
+        <div id="plate-result" class="pay-summary" style="margin-top:16px" hidden></div>
+      </article>
+      <article class="panel list-panel">
+        <div class="panel-heading"><div><p class="eyebrow">SEGUIMIENTO</p><h3>Mensualidades de clientes</h3></div></div>
+        <form id="filter-form" class="search-form" style="max-width:none">
+          <select id="filter-status" aria-label="Estado" style="margin:0">
+            <option value="">Todas</option><option value="VIGENTE">Vigentes</option><option value="POR_VENCER">Por vencer (5 días o menos)</option>
+            <option value="VENCIDA">Vencidas</option><option value="SIN_MENSUALIDAD">Sin mensualidad</option>
+          </select>
+          <button type="submit" class="secondary">Filtrar</button>
+        </form>
+        <div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>Placa</th><th>Cliente</th><th>Tipo</th><th>Vence</th><th>Días</th><th>Estado</th><th>Acción</th></tr></thead>
+          <tbody id="memberships-body"><tr><td colspan="7" class="empty">Cargando…</td></tr></tbody></table></div>
+      </article>
+    </section>
+    <footer>Autos Colombia · Iteración 3 · Gestión de pagos</footer>
+  </main>
+  <script type="module" src="/js/mensualidades.js"></script>
+</body>
+</html>

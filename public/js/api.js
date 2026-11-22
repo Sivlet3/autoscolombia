@@ -12,13 +12,11 @@ const send = (method, path, data) =>
   request(path, { method, body: data === undefined ? undefined : JSON.stringify(data) });
 
 export const api = {
-  // Iteración 1: vehículos
   entry: (data) => request('/api/vehicles/entry', { method: 'POST', body: JSON.stringify(data) }),
   inside: () => request('/api/vehicles/inside'),
   exit: (id, notes = '') => request(`/api/vehicles/${id}/exit`, { method: 'POST', body: JSON.stringify({ notes }) }),
   history: (plate) => request(`/api/vehicles/history?plate=${encodeURIComponent(plate)}`),
 
-  // Iteración 2: clientes
   clients: (term = '') => request(`/api/clients?q=${encodeURIComponent(term)}`),
   client: (id) => request(`/api/clients/${id}`),
   createClient: (data) => send('POST', '/api/clients', data),
@@ -27,7 +25,6 @@ export const api = {
   reactivateClient: (id) => send('POST', `/api/clients/${id}/reactivate`),
   addClientVehicle: (id, data) => send('POST', `/api/clients/${id}/vehicles`, data),
 
-  // Iteración 2: celdas
   cells: ({ type = '', status = '' } = {}) =>
     request(`/api/cells?type=${encodeURIComponent(type)}&status=${encodeURIComponent(status)}`),
   createCell: (data) => send('POST', '/api/cells', data),
@@ -35,5 +32,20 @@ export const api = {
   inactivateCell: (id) => send('POST', `/api/cells/${id}/inactivate`),
   reactivateCell: (id) => send('POST', `/api/cells/${id}/reactivate`),
   assignCell: (id, data) => send('POST', `/api/cells/${id}/assign`, data),
-  releaseCell: (id) => send('POST', `/api/cells/${id}/release`)
+  releaseCell: (id) => send('POST', `/api/cells/${id}/release`),
+
+  // Iteración 3: pagos
+  paymentConfig: () => request('/api/payments/config'),
+  rates: () => request('/api/payments/rates'),
+  payments: ({ q = '', status = '' } = {}) =>
+    request(`/api/payments?q=${encodeURIComponent(q)}&status=${encodeURIComponent(status)}`),
+  payment: (id) => request(`/api/payments/${id}`),
+  paymentByReference: (reference, transactionId = '') =>
+    request(`/api/payments/by-reference/${encodeURIComponent(reference)}?transactionId=${encodeURIComponent(transactionId)}`),
+  createPayment: (data) => send('POST', '/api/payments', data),
+  syncPayment: (id) => send('POST', `/api/payments/${id}/sync`),
+  cancelPayment: (id) => send('POST', `/api/payments/${id}/cancel`),
+  simulatePayment: (reference, outcome) => send('POST', `/api/payments/simulator/${encodeURIComponent(reference)}/${outcome}`),
+  membership: (plate) => request(`/api/payments/memberships/status?plate=${encodeURIComponent(plate)}`),
+  memberships: (status = '') => request(`/api/payments/memberships?status=${encodeURIComponent(status)}`)
 };

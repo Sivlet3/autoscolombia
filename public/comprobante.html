@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autos Colombia | Comprobante</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pagos.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">AC</div>
+    <div><h1>Autos Colombia</h1><p>Comprobante de pago</p></div>
+    <nav class="nav"><a href="/">Parqueadero</a><a href="/clientes.html">Clientes</a><a href="/celdas.html">Celdas</a><a href="/pagos.html">Pagos</a><a href="/mensualidades.html">Mensualidades</a></nav>
+  </header>
+  <main class="container">
+    <div id="message" hidden></div>
+    <section class="receipt" id="receipt"><p class="muted">Cargando comprobante…</p></section>
+    <p class="no-print" style="text-align:center"><button type="button" id="print" hidden>Imprimir comprobante</button></p>
+  </main>
+  <script type="module" src="/js/comprobante.js"></script>
+</body>
+</html>

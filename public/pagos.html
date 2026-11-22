@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autos Colombia | Pagos</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pagos.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">AC</div>
+    <div><h1>Autos Colombia</h1><p>Gestión de pagos</p></div>
+    <nav class="nav"><a href="/">Parqueadero</a><a href="/clientes.html">Clientes</a><a href="/celdas.html">Celdas</a><a href="/pagos.html">Pagos</a><a href="/mensualidades.html">Mensualidades</a></nav>
+  </header>
+  <main class="container">
+    <div id="message" class="message" role="status" hidden></div>
+    <section class="layout">
+      <article class="panel">
+        <div class="panel-heading"><div><p class="eyebrow">NUEVO PAGO</p><h3>Cobrar mensualidad</h3></div><span class="step">01</span></div>
+        <form id="lookup-form">
+          <label for="plate">Placa del vehículo</label>
+          <div class="search-form">
+            <input id="plate" name="plate" maxlength="10" minlength="5" required placeholder="Ej. ABC123">
+            <button type="submit" class="secondary">Consultar</button>
+          </div>
+        </form>
+        <div id="summary" class="pay-summary" hidden></div>
+        <form id="pay-form" hidden>
+          <label>Método de pago</label>
+          <div class="method-options">
+            <label><input type="radio" name="method" value="PASARELA" checked><span>Pasarela<small>Tarjeta, PSE o Nequi</small></span></label>
+            <label><input type="radio" name="method" value="EFECTIVO"><span>Efectivo<small>Pago en portería</small></span></label>
+          </div>
+          <button type="submit" id="pay-button">Cobrar <span>→</span></button>
+        </form>
+        <div id="result" hidden></div>
+      </article>
+      <article class="panel list-panel">
+        <div class="panel-heading"><div><p class="eyebrow">HISTORIAL</p><h3>Pagos registrados</h3></div></div>
+        <form id="search-form" class="search-form" style="max-width:none">
+          <input id="search-term" aria-label="Buscar" placeholder="Placa, cliente, documento o referencia">
+          <select id="filter-status" aria-label="Estado" style="margin:0;width:170px">
+            <option value="">Todos</option><option value="PENDIENTE">Pendiente</option><option value="APROBADO">Aprobado</option>
+            <option value="RECHAZADO">Rechazado</option><option value="ANULADO">Anulado</option><option value="ERROR">Error</option>
+          </select>
+          <button type="submit" class="secondary">Buscar</button>
+        </form>
+        <div class="table-wrap" style="margin-top:14px"><table class="pay-table"><thead><tr><th>Referencia</th><th>Placa</th><th>Cliente</th><th>Valor</th><th>Método</th><th>Estado</th><th>Fecha</th><th>Acciones</th></tr></thead>
+          <tbody id="payments-body"><tr><td colspan="8" class="empty">Cargando pagos…</td></tr></tbody></table></div>
+      </article>
+    </section>
+    <footer>Autos Colombia · Iteración 3 · Gestión de pagos</footer>
+  </main>
+  <script type="module" src="/js/pagos.js"></script>
+</body>
+</html>
